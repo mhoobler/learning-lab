@@ -1,0 +1,43 @@
+.label-wrapper {
+  position: relative;
+  background-color: #282828;
+  border: 2px solid #484848;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+
+  &.bottom {
+    flex-direction: column-reverse;
+  }
+
+  .label-wrapper-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .svg-container {
+      width: 80%;
+      display: flex;
+      height: 1rem;
+      svg {
+        height: 100%;
+
+        overflow: visible;
+
+        foreignObject {
+        }
+      }
+      div {
+        width: 80%;
+        background-color: #484848;
+        text-align: center;
+      }
+    }
+  }
+  
+  .label-wrapper-contents {
+    display: flex;
+  }
+}
+

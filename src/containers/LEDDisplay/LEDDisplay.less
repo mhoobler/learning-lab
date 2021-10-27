@@ -1,0 +1,54 @@
+.led-display-contents-wrapper {
+  position: relative;
+  height: 100%;
+  width: 32rem;
+}
+.led-display-contents {
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+
+  
+  .spring-group {
+    height: 100%;
+    position: absolute;
+    left: 0;
+
+    .led-label {
+      position: absolute;
+      left: calc(50% - 2.5rem);
+      top: calc(50% - 2.5rem);
+      height: 5rem;
+      width: 5rem;
+      background-color: transparent;
+      border-radius: .25rem;
+      border: 2px solid #606060;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+    }
+
+    .spring-row {
+      width: 20rem;
+      z-index: 4;
+
+      &.top {
+        margin-top: 1.5rem;
+        margin-bottom: auto;
+      }
+      &.bottom {
+        margin-top: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      >* {
+        margin: 0 1rem;
+      }
+
+      span {
+        padding: 0.25rem;
+      }
+    }
+  }
+}
