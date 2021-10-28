@@ -1,0 +1,95 @@
+@tray-size: 5.9rem;
+
+.sidebar-wrapper {
+  position: absolute;
+  display: flex;
+
+
+  &.top {
+    top: 0;
+    transition: top 150ms ease-in-out;
+    &.hide {
+      top: -@tray-size;
+    }
+    .sidebar-container {
+      flex-direction: column;
+    }
+  }
+  &.bottom {
+    bottom: 0;
+    transition: bottom 150ms ease-in-out;
+    &.hide {
+      bottom: -@tray-size;
+    }
+    .sidebar-container {
+      flex-direction: column-reverse;
+    }
+  }
+  &.right {
+    right: 0;
+    transition: right 150ms ease-in-out;
+    &.hide {
+      right: -@tray-size;
+    }
+    .sidebar-container {
+      flex-direction: row-reverse;
+    }
+  }
+  &.left {
+    left: 0;
+    transition: left 150ms ease-in-out;
+    &.hide {
+      left: -@tray-size;
+    }
+    .sidebar-container {
+      flex-direction: row;
+    }
+  }
+
+  &.top,
+  &.bottom {
+    width: 100%;
+    .sidebar-container {
+      margin: 0 auto;
+    }
+  }
+
+  &.right,
+  &.left {
+    height: 100%;
+    .sidebar-container {
+      margin: auto 0;
+    }
+  }
+
+  .sidebar-container {
+    position: relative;
+    border: 1px solid black;
+    margin: -1px;
+
+    ul {
+      padding: 0.75rem;
+      li {
+        text-align: center;
+        border-radius: 4px;
+        height: 3rem;
+        width: 3rem;
+        margin: calc(0.25rem - 1px);
+        border: 1px solid black;
+
+      }
+    }
+
+    .options {
+      position: relative;
+      color: black;
+    }
+
+    .pull-tab {
+      background-color: #663300;
+      color: black;
+    }
+
+  }
+}
+

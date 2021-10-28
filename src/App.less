@@ -1,11 +1,11 @@
 * {
   user-select: none;
   font-family: SFMono-Regular, sans-serif;
-  font-size: 0.8rem;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: #fff;
+  list-style: none;
 }
 
 
@@ -28,6 +28,7 @@ button {
   flex-direction: column;
 }
 
+/* remove this */
 .center-spaced {
   align-items: center;
   justify-content: space-between;
@@ -41,8 +42,24 @@ button {
   justify-content: space-between;
 }
 
+.centered {
+  justify-content: center;
+}
+
 .App {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+
   >.label-wrapper {
     margin: 8px;
   }
+}
+
+.sidebar-group-container {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
