@@ -3,16 +3,16 @@ import "./Sidebar.less";
 
 type Props = {
   align: "top" | "bottom" | "left" | "right";
+  tray: number[];
   w: number;
   h: number;
 };
 
-const Sidebar: React.FC<Props> = ({ align, w, h }) => {
+const Sidebar: React.FC<Props> = ({ align, tray, w, h }) => {
   const [hide, setHide] = useState(false);
   const classAdd = align.match(/(top|bottom)/i)
     ? ["col", "row"]
     : ["row", "col"];
-  const arr = new Array(8).fill(0);
 
   const handleHide = () => {
     setHide(!hide);
@@ -23,7 +23,7 @@ const Sidebar: React.FC<Props> = ({ align, w, h }) => {
       <div className={`sidebar-container ${classAdd[0]}`}>
         <button className="options">O</button>
         <ul className={classAdd[1]}>
-          {arr.map((e: number, i: number) => {
+          {tray.map((e: number, i: number) => {
             return (
               <li className="row center centered" key={i}>
                 {e}

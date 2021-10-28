@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   LabelWrapper,
   SpringPin,
@@ -14,6 +14,8 @@ import {
   Sidebar,
 } from "./containers";
 
+import { SidebarProvider, SidebarContext } from "./utils/SidebarContext";
+
 import "./App.less";
 
 const debounce = (func: (a: unknown) => unknown, time: number) => {
@@ -28,13 +30,22 @@ const debounce = (func: (a: unknown) => unknown, time: number) => {
 
 type SGprops = { res: [number, number] };
 
+type SidebarStateType = {
+  align: "top" | "bottom" | "left" | "right";
+  tray: number[];
+};
+
 const SidebarGroup: React.FC<SGprops> = ({ res }) => {
+  const { state, setState } = useContext(SidebarContext);
+  const [selected, setSelected] = useState(-1);
+
   return (
     <div className="sidebar-group-container">
-      <Sidebar align={"top"} w={res[0]} h={res[1]} />
-      <Sidebar align={"left"} w={res[0]} h={res[1]} />
-      <Sidebar align={"right"} w={res[0]} h={res[1]} />
-      <Sidebar align={"bottom"} w={res[0]} h={res[1]} />
+      {state.map((e: SidebarStateType, i: number) => {
+        return <Sidebar {...e} w={res[0]} h={res[1]} />;
+      })}
+      {/*
+       */}
     </div>
   );
 };
@@ -54,7 +65,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <SidebarGroup res={res} />
+      <SidebarProvider>
+        <SidebarGroup res={res} />
+      </SidebarProvider>
     </div>
   );
 };
