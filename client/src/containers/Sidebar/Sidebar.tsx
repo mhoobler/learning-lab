@@ -18,20 +18,22 @@ const Sidebar: React.FC<Props> = ({ align, tray, w, h }) => {
     setHide(!hide);
   };
 
+  // TODO: Add Modal
+
   return (
     <div className={`sidebar-wrapper ${align} ${hide ? "hide" : null}`}>
       <div className={`sidebar-container ${classAdd[0]}`}>
-        <button className="options">O</button>
+        <button className="options clickable">O</button>
         <ul className={classAdd[1]}>
           {tray.map((e: number, i: number) => {
             return (
-              <li className="row center centered" key={i}>
+              <li className="row center centered clickable" key={i}>
                 {e}
               </li>
             );
           })}
         </ul>
-        <button className="pull-tab" onClick={handleHide}>
+        <button className="pull-tab clickable" onClick={handleHide}>
           O
         </button>
       </div>

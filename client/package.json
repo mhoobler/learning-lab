@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "proxy": "http://localhost:3001",
   "scripts": {
     "build": "echo test",
     "dev": "webpack serve --config webpack-dev.config.js --open"
