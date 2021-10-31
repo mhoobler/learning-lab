@@ -1,0 +1,10 @@
+{
+  "name": "learning-lab",
+  "version": "1.0.0",
+  "repository": "git@github.com:mhoobler/learning-lab.git",
+  "author": "mhoobler <hoobler.michael@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -k \"cd backend && nodemon index.ts \" \"cd client && yarn dev\" "
+  }
+}

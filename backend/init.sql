@@ -1,10 +1,8 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS speakers;
-DROP TABLE IF EXISTS projects;
-DROP TABLE IF EXISTS components;
-DROP TABLE IF EXISTS project_data;
-DROP TABLE IF EXISTS potentiometers;
-DROP TABLE IF EXISTS leds;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS speakers CASCADE;
+DROP TABLE IF EXISTS projects CASCADE;
+DROP TABLE IF EXISTS components CASCADE;
+DROP TABLE IF EXISTS project_data CASCADE;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -22,7 +20,7 @@ CREATE TABLE projects (
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
-CREATE TABLE components(
+CREATE TABLE components (
   id SERIAL PRIMARY KEY,
   short_name VARCHAR(48) NOT NULL,
   long_name VARCHAR(96),
@@ -31,8 +29,7 @@ CREATE TABLE components(
   sub_category VARCHAR(48),
   manufacturer VARCHAR(48),
   image_url VARCHAR(48),
-  max_rating INT,
-  min_rating INT
+  specs JSON
 );
 
 
@@ -43,55 +40,26 @@ CREATE TABLE project_data (
   x INT DEFAULT 0,
   y INT DEFAULT 0,
   sprites VARCHAR(48)[],
+  data JSON,
   FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
   FOREIGN KEY (component_id) REFERENCES components (id) ON DELETE CASCADE
 );
 
-CREATE TABLE potentiometers (
-  pin1 VARCHAR(48),
-  pin2 VARCHAR(48),
-  pin3 VARCHAR(48)
-) INHERITS (project_data);
-
-CREATE TABLE leds (
-  pin1 VARCHAR(48),
-  pin2 VARCHAR(48)
-) INHERITS (project_data);
-
-
-CREATE TABLE speakers (
-  pin1 VARCHAR(48),
-  pin2 VARCHAR(48)
-) INHERITS (project_data);
 
 INSERT INTO components (
   short_name,
-  category,
+  category
 ) VALUES (
-  "Potentiometer",
-  "Potentiometer",
+  'Potentiometer',
+  'Potentiometer'
+), (
+  'LED',
+  'LED'
+), (
+  'Capacitor',
+  'Capacitor'
+), (
+  'SP-1605',
+  'Audio'
 );
 
-INSERT INTO components (
-  short_name,
-  category,
-) VALUES (
-  "LED",
-  "LED",
-);
-
-INSERT INTO components (
-  short_name,
-  category,
-) VALUES (
-  "Capacitor",
-  "Capacitor",
-);
-
-INSERT INTO components (
-  short_name,
-  category,
-) VALUES (
-  "SP-1605",
-  "Audio",
-);
