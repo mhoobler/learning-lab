@@ -37,7 +37,13 @@ const SidebarGroup: React.FC<SGprops> = ({ res }) => {
 const App = () => {
   const [res, setRes] = useState<[number, number]>([0, 0]);
 
-  fetch("/api/api/projects")
+  useEffect(() => {
+    const { innerWidth, innerHeight } = window;
+
+    setRes([innerWidth, innerHeight]);
+  }, []);
+
+  fetch("/api/api/projects?id=1")
     .then((res) => res.json())
     .then((data) => console.log(data));
 
@@ -46,7 +52,7 @@ const App = () => {
       <SidebarProvider>
         <SidebarGroup res={res} />
       </SidebarProvider>
-      <Canvas />
+      <Canvas res={res} />
     </div>
   );
 };
