@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import { TrayItem } from "../../components";
+
 import "./Sidebar.less";
 
 type Props = {
@@ -26,11 +29,7 @@ const Sidebar: React.FC<Props> = ({ align, tray, w, h }) => {
         <button className="options clickable">O</button>
         <ul className={classAdd[1]}>
           {tray.map((e: number, i: number) => {
-            return (
-              <li className="row center centered clickable" key={i}>
-                {e}
-              </li>
-            );
+            return <TrayItem onClick={() => {}}>T</TrayItem>;
           })}
         </ul>
         <button className="pull-tab clickable" onClick={handleHide}>

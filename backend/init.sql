@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS speakers CASCADE;
 DROP TABLE IF EXISTS projects CASCADE;
 DROP TABLE IF EXISTS components CASCADE;
 DROP TABLE IF EXISTS project_data CASCADE;
@@ -10,6 +9,18 @@ CREATE TABLE users (
   password VARCHAR(48) NOT NULL
 );
 
+INSERT INTO users (
+  username,
+  password
+) VALUES (
+  'user1',
+  '12345'
+), (
+  'user2',
+  '12345'
+);
+
+
 CREATE TABLE projects (
   id SERIAL PRIMARY KEY,
   name VARCHAR(48) NOT NULL,
@@ -19,6 +30,22 @@ CREATE TABLE projects (
   UNIQUE (user_id, name),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+
+INSERT INTO projects (
+  name,
+  user_id
+) VALUES (
+  'user1project1',
+  '1'
+), (
+  'user1project2',
+  '1'
+), (
+  'user2project1',
+  '2'
+);
+
+
 
 CREATE TABLE components (
   id SERIAL PRIMARY KEY,

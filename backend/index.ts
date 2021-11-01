@@ -2,13 +2,11 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import bodyParser from "body-parser";
-import db from "./db";
 
 const app = express();
 const PORT = 3001;
 
 app.use(bodyParser.json());
-db.connect();
 
 app.get("/test", (req, res) => {
   res.send({ message: "test" });
@@ -18,6 +16,10 @@ app.get("/tiles/:name", (req, res) => {
   const { name } = req.params;
   res.sendFile(__dirname + "/tiles/" + name);
 });
+
+// ROUTES
+import api from "./routes/api";
+app.use("/api", api);
 
 app.get("*", (req, res) => {
   console.log("could not find route:" + req.url);

@@ -6,14 +6,7 @@ import {
   PushButton,
 } from "./components";
 
-import {
-  LEDDisplay,
-  Power,
-  LightEmittingDiodes as LED,
-  BreadBoard,
-  Sidebar,
-  Canvas,
-} from "./containers";
+import { Sidebar, Canvas } from "./containers";
 
 import { debounce } from "./utils/susdash";
 
@@ -43,20 +36,10 @@ const SidebarGroup: React.FC<SGprops> = ({ res }) => {
 
 const App = () => {
   const [res, setRes] = useState<[number, number]>([0, 0]);
-  useEffect(() => {
-    fetch("/api/test")
-      .then((res) => res.json())
-      .then((data) => console.log(data));
 
-    const handleResize = debounce((evt) => {
-      setRes((curr) => [curr[0] + 1, curr[1] + 2]);
-    }, 150);
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
+  fetch("/api/api/projects")
+    .then((res) => res.json())
+    .then((data) => console.log(data));
 
   return (
     <div className="App">
