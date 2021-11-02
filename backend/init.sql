@@ -55,10 +55,32 @@ CREATE TABLE components (
   category VARCHAR(48) NOT NULL,
   sub_category VARCHAR(48),
   manufacturer VARCHAR(48),
+  sprites VARCHAR(96)[],
   image_url VARCHAR(48),
   specs JSON
 );
 
+INSERT INTO components (
+  short_name,
+  category,
+  sprites
+) VALUES (
+  'Potentiometer',
+  'Potentiometer',
+  '{"http://locahost:3000/api/sprites/led.png", "http://locahost:3000/api/sprites/led.png"}'
+), (
+  'LED',
+  'LED',
+  '{"http://locahost:3000/api/sprites/led.png"}'
+), (
+  'Capacitor',
+  'Capacitor',
+  '{"http://locahost:3000/api/sprites/led.png"}'
+), (
+  'SP-1605',
+  'Audio',
+  '{"http://locahost:3000/api/sprites/led.png"}'
+);
 
 CREATE TABLE project_data (
   id BIGSERIAL PRIMARY KEY,
@@ -66,27 +88,25 @@ CREATE TABLE project_data (
   project_id INT NOT NULL,
   x INT DEFAULT 0,
   y INT DEFAULT 0,
-  sprites VARCHAR(48)[],
   data JSON,
   FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
   FOREIGN KEY (component_id) REFERENCES components (id) ON DELETE CASCADE
 );
 
-
-INSERT INTO components (
-  short_name,
-  category
+INSERT INTO project_data (
+  component_id,
+  project_id
 ) VALUES (
-  'Potentiometer',
-  'Potentiometer'
+  1,
+  1
 ), (
-  'LED',
-  'LED'
+  2,
+  1
 ), (
-  'Capacitor',
-  'Capacitor'
+  1,
+  2
 ), (
-  'SP-1605',
-  'Audio'
+  2,
+  2
 );
 
