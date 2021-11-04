@@ -1,35 +1,59 @@
-import { useState } from "react";
+import { useState, useContext, SyntheticEvent } from "react";
 
 import { TrayItem } from "../../components";
+import { ProjectContext } from "../../utils/ProjectContext";
 
 import "./Sidebar.less";
 
 type Props = {
-  align: "top" | "bottom" | "left" | "right";
   tray: number[];
-  w: number;
-  h: number;
+  width: number;
+  height: number;
 };
 
-const Sidebar: React.FC<Props> = ({ align, tray, w, h }) => {
+const Sidebar: React.FC<Props> = ({ tray, width, height }) => {
   const [hide, setHide] = useState(false);
-  const classAdd = align.match(/(top|bottom)/i)
-    ? ["col", "row"]
-    : ["row", "col"];
+  const { state } = useContext(ProjectContext);
+  const classAdd = ["col", "row"];
 
   const handleHide = () => {
     setHide(!hide);
   };
 
+  const handleMouseDown = (evt: SyntheticEvent<HTMLButtonElement>) => {
+    console.log("tray-click");
+  };
+
+  const handleOptionsClick = () => {
+    console.log("options-click");
+  };
+
   // TODO: Add Modal
 
   return (
-    <div className={`sidebar-wrapper ${align} ${hide ? "hide" : null}`}>
+    <div className={`sidebar-wrapper centered ${hide ? "hide" : ""}`}>
       <div className={`sidebar-container ${classAdd[0]}`}>
-        <button className="options clickable">O</button>
+        <button className="options clickable" onClick={handleOptionsClick}>
+          O
+        </button>
         <ul className={classAdd[1]}>
+          {/* TODO: Sprites need to load in differently */}
           {tray.map((e: number, i: number) => {
-            return <TrayItem onClick={() => {}}>T</TrayItem>;
+            if (state.projectData[i]) {
+              return (
+                <TrayItem key={i} onMouseDown={handleMouseDown}>
+                  <img
+                    src={state.projectData[i].sprites[0]}
+                    draggable="false"
+                  />
+                </TrayItem>
+              );
+            }
+            return (
+              <TrayItem key={i} onMouseDown={handleMouseDown}>
+                T
+              </TrayItem>
+            );
           })}
         </ul>
         <button className="pull-tab clickable" onClick={handleHide}>

@@ -6,5 +6,8 @@
       "@babel/preset-react",
       {"allowNamespaces": true, "runtime": "automatic"}
     ]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime"]
   ]
 }

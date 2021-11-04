@@ -3,9 +3,13 @@
 .sidebar-wrapper {
   position: absolute;
   display: flex;
+  width: 100%;
+  .sidebar-container {
+    margin: 0 auto;
+  }
 
 
-  &.top {
+  &:nth-of-type(1) {
     top: 0;
     transition: top 150ms ease-in-out;
     &.hide {
@@ -15,7 +19,7 @@
       flex-direction: column;
     }
   }
-  &.bottom {
+  &:nth-of-type(2) {
     bottom: 0;
     transition: bottom 150ms ease-in-out;
     &.hide {
@@ -23,48 +27,6 @@
     }
     .sidebar-container {
       flex-direction: column-reverse;
-    }
-  }
-  &.right {
-    right: 0;
-    transition: right 150ms ease-in-out;
-    &.hide {
-      right: -@tray-size;
-    }
-    .sidebar-container {
-      flex-direction: row-reverse;
-    }
-  }
-  &.left {
-    left: 0;
-    transition: left 150ms ease-in-out;
-    &.hide {
-      left: -@tray-size;
-    }
-    .sidebar-container {
-      flex-direction: row;
-    }
-  }
-
-  &.top,
-  &.bottom {
-    width: 100%;
-    .sidebar-container {
-      margin: 0 auto;
-      button {
-        height: 1rem;
-      }
-    }
-  }
-
-  &.right,
-  &.left {
-    height: 100%;
-    .sidebar-container {
-      margin: auto 0;
-      button {
-        width: 1rem;
-      }
     }
   }
 
@@ -75,15 +37,6 @@
 
     ul {
       padding: 0.75rem;
-      li {
-        text-align: center;
-        border-radius: 4px;
-        height: 3rem;
-        width: 3rem;
-        margin: calc(0.25rem - 1px);
-        border: 1px solid black;
-
-      }
     }
 
     .options {

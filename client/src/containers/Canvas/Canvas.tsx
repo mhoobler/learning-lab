@@ -1,14 +1,9 @@
-import {
-  useCallback,
-  useState,
-  useRef,
-  useEffect,
-  SyntheticEvent,
-  FC,
-} from "react";
+import { useState, useRef, useEffect, FC, useContext } from "react";
 import useBreadBoard from "./useBreadBoard";
 
-import { debounce } from "../../utils/susdash";
+import { ProjectContext } from "../../utils/ProjectContext";
+
+import { init } from "./canvasHandle";
 
 import "./Canvas.less";
 
@@ -47,6 +42,8 @@ const scaleDraw = (
 };
 
 const Canvas: FC<Props> = ({ res }) => {
+  const { state } = useContext(ProjectContext);
+
   const canvasRef = useRef<HTMLCanvas | null>(null);
   const contextRef = useRef<Context2D | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -80,12 +77,15 @@ const Canvas: FC<Props> = ({ res }) => {
   }, [res]);
 
   const handleRef = (elm: HTMLCanvas) => {
-    const init = canvasRef.current === null;
+    const checkRef = canvasRef.current === null;
     canvasRef.current = elm;
     contextRef.current = elm.getContext("2d");
-    if (init) {
+    if (checkRef) {
       initDraw(contextRef.current);
+      init(state.projectData, canvasRef.current);
     }
+
+    // canvasHandle testing
   };
 
   return (

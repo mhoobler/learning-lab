@@ -65,21 +65,25 @@ INSERT INTO components (
   category,
   sprites
 ) VALUES (
+  'Breadboard',
+  'Breadboard',
+  '{"http://localhost:3000/api/sprites/breadboard-cell.png"}'
+), (
   'Potentiometer',
   'Potentiometer',
-  '{"http://locahost:3000/api/sprites/led.png", "http://locahost:3000/api/sprites/led.png"}'
+  '{"http://localhost:3000/api/sprites/led.png", "http://localhost:3000/api/sprites/led.png"}'
 ), (
   'LED',
   'LED',
-  '{"http://locahost:3000/api/sprites/led.png"}'
+  '{"http://localhost:3000/api/sprites/led.png"}'
 ), (
   'Capacitor',
   'Capacitor',
-  '{"http://locahost:3000/api/sprites/led.png"}'
+  '{"http://localhost:3000/api/sprites/led.png"}'
 ), (
   'SP-1605',
   'Audio',
-  '{"http://locahost:3000/api/sprites/led.png"}'
+  '{"http://localhost:3000/api/sprites/led.png"}'
 );
 
 CREATE TABLE project_data (
@@ -100,13 +104,13 @@ INSERT INTO project_data (
   1,
   1
 ), (
-  2,
+  3,
   1
 ), (
   1,
   2
 ), (
-  2,
+  3,
   2
 );
 

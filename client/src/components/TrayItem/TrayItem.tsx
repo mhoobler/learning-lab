@@ -1,13 +1,16 @@
+import { SyntheticEvent } from "react";
 import "./TrayItem.less";
 
 type Props = {
-  onClick: () => void;
+  onMouseDown: (evt: SyntheticEvent<HTMLButtonElement>) => void;
 };
 
-const TrayItem: React.FC<Props> = ({ children, onClick }) => {
+const TrayItem: React.FC<Props> = ({ children, onMouseDown }) => {
   return (
     <li className="trayitem-container row center centered clickable">
-      <button onClick={onClick}>{children}</button>
+      <button className="clickable" onMouseDown={onMouseDown}>
+        {children}
+      </button>
     </li>
   );
 };

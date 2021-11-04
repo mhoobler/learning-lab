@@ -8,6 +8,11 @@ const PORT = 3001;
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  console.log(req.url);
+  next();
+});
+
 app.get("/test", (req, res) => {
   res.send({ message: "test" });
 });
@@ -20,6 +25,7 @@ app.get("/tiles/:name", (req, res) => {
 // ROUTES
 import api from "./routes/api";
 app.use("/api", api);
+app.use("/sprites", express.static(__dirname + "/sprites"));
 
 app.get("*", (req, res) => {
   console.log("could not find route:" + req.url);

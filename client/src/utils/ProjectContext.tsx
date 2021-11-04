@@ -1,10 +1,7 @@
-import { createContext, useReducer } from "react";
+import { FC, createContext, useReducer } from "react";
 
-type ProjectState = {
-  components: any;
-};
-
-const reducer = (state: ProjectState, action: any) => {
+// TODO: any
+const reducer = (state: ProjectContextState, action: any) => {
   const { type, payload } = action;
   switch (type) {
     case "LOAD_PROJECT": {
@@ -19,7 +16,7 @@ const reducer = (state: ProjectState, action: any) => {
     }
     case "REMOVE_DATA": {
       const newState = { ...state };
-      delete newState.components[payload.id];
+      delete newState.projectData[payload.id];
       return newState;
     }
     default:
@@ -27,19 +24,31 @@ const reducer = (state: ProjectState, action: any) => {
   }
 };
 
-const initState: ProjectState = { components: {} };
+const initState0: ProjectContextState = {
+  projectData: {},
+  sidebarData: [Array(8).fill(0), Array(8).fill(0)],
+};
+
+type Props = {
+  projectData: ProjectDataMap;
+};
 
 const ProjectContext = createContext<{
-  state: ProjectState;
+  state: ProjectContextState;
   dispatch: any;
 }>({
-  state: initState,
+  state: initState0,
   dispatch: () => {},
 });
 const { Provider } = ProjectContext;
 
-const ProjectProvider: React.FC = ({ children }) => {
+const ProjectProvider: React.FC<Props> = ({ projectData, children }) => {
+  const initState = {
+    projectData: projectData || {},
+    sidebarData: [Array(8).fill(0), Array(8).fill(0)],
+  };
   const [state, dispatch] = useReducer(reducer, initState);
+  console.log(state);
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };

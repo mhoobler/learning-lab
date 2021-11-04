@@ -7,6 +7,7 @@ const router = Router();
 //   - project_data (components inside of a project)
 
 // Get projects by user_id
+// Get single project
 router.get("/", async (req, res) => {
   try {
     const user_id = req.query.user_id;
@@ -14,9 +15,18 @@ router.get("/", async (req, res) => {
 
     // TODO: requires auth
     if (id) {
-      const queryString = `SELECT * FROM project_data WHERE project_id = ${id}`;
-      const project = await db.query(queryString);
-      res.send(project.rows);
+      const queryString = [
+        `SELECT * FROM components c, project_data pd`,
+        `WHERE pd.project_id = ${id} AND c.id = pd.component_id`,
+      ].join(" ");
+
+      const projectData = await db.query(queryString);
+      const projectDataMap = projectData.rows.map((e: any) => {
+        return { [e.id]: e };
+      });
+      const result = Object.assign({}, ...projectDataMap);
+
+      res.send(result);
       return;
     }
 
@@ -31,20 +41,6 @@ router.get("/", async (req, res) => {
     console.log(err);
   }
 });
-
-// Get single project
-//router.get("/", async (req, res) => {
-//  try {
-//    const id = req.query.id;
-//    const project = await db.query("SELECT * FROM projects WHERE id = $1", [
-//      id,
-//    ]);
-//    console.log(project);
-//    res.send(project);
-//  } catch (err) {
-//    console.log(err);
-//  }
-//});
 
 // Post new project
 // Update entire project
